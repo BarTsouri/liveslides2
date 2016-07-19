@@ -7,7 +7,7 @@
     <title>Live Slides Templates</title>
     <script src="jquery.min.js"></script>
     <script src="jquery.transit.min.js"></script>
-    <script src="charts.min.js"></script>
+    <script src="charts.js"></script>
     <script src="main.js"></script>
     <style>
         html,body{
@@ -157,6 +157,16 @@
             content: "Daily Info"
         }
 
+        #graph{
+            flex-direction: column;
+        }
+
+        #graph span{
+            margin-bottom: 1vh;
+            font-size: 3.75vh;
+            text-decoration: underline;
+        }
+
         #graph::before{
             content: "10 hours ago"
         }
@@ -171,6 +181,7 @@
     <div class="background-image"></div>
     <div id="slides">
         <div class="slide" id="graph">
+            <span>Unique Users</span>
             <canvas id="canvas"></canvas>
         </div>
         <div id="news-slide" class="slide">

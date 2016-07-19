@@ -28,9 +28,9 @@
 		var config = {
 			type: 'line',
 			data: {
-				labels: ["January", "February", "March", "April", "May", "June", "July"],
+				labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
 				datasets: [{
-					data: [500, 512, 1000, 10023, 1, 203203, 5420],
+					data: [500, 512, 1000, 10023, 209, 203203, 5420],
 					fill: false,
 					borderDash: [5, 5]
 				}]
@@ -38,20 +38,27 @@
 			options: {
 				responsive: true,
 				title:{
-					display:true,
+					display:false,
 					text:'User Interaction'
 				},
 				scales: {
 					xAxes: [{
 						display: true,
 						gridLines:{
-							drawOnChartArea: false
+							drawTicks: false,
+							drawOnChartArea: false,
+							drawBorder: false
+						},
+						ticks:{
+							fontColor: "#fff",
+							padding: 0
 						}
 					}],
 					yAxes: [{
 						type: 'logarithmic',
 						display: false,
 						gridLines:{
+							drawTicks: false,
 							drawOnChartArea: false
 						}
 					}]
@@ -61,7 +68,7 @@
 				}
 			},
 
-			tooltips: {
+			tooltip: {
 				mode: 'single',
 				callbacks: {
 					title: function(tooltipItems, data) {
@@ -76,7 +83,7 @@
 			}
 		};
 
-		$.each(config.data.datasets, function(i, dataset) {
+		config.data.datasets.forEach(function(dataset) {
 			dataset.borderColor = randomColor(1);
 			dataset.backgroundColor = randomColor(1);
 			dataset.pointBorderColor = '#CCC';
@@ -85,6 +92,7 @@
 		});
 
 		var ctx = document.getElementById("canvas").getContext("2d");
-		new Chart(ctx, config);
+		window.c = new Chart(ctx, config);
+		window.c.defaultFontColor = "#fff";
 	}
 }());
