@@ -38,16 +38,40 @@
 			options: {
 				responsive: true,
 				title:{
-					display:false,
+					display:true,
 					text:'User Interaction'
 				},
 				scales: {
 					xAxes: [{
-						display: true
+						display: true,
+						gridLines:{
+							drawOnChartArea: false
+						}
 					}],
 					yAxes: [{
-						type: 'logarithmic'
+						type: 'logarithmic',
+						display: false,
+						gridLines:{
+							drawOnChartArea: false
+						}
 					}]
+				},
+				legend: {
+					display: false
+				}
+			},
+
+			tooltips: {
+				mode: 'single',
+				callbacks: {
+					title: function(tooltipItems, data) {
+						// Title doesn't make sense for scatter since we format the data as a point
+						return '';
+					},
+					label: function(tooltipItem, data) {
+						debugger;
+						return '';
+					}
 				}
 			}
 		};
@@ -55,7 +79,7 @@
 		$.each(config.data.datasets, function(i, dataset) {
 			dataset.borderColor = randomColor(1);
 			dataset.backgroundColor = randomColor(1);
-			dataset.pointBorderColor = 'rgb(200, 200, 200)';
+			dataset.pointBorderColor = '#CCC';
 			dataset.pointBackgroundColor = randomColor(1);
 			dataset.pointBorderWidth = 1;
 		});
