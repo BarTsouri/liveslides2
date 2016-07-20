@@ -57,10 +57,29 @@
 					}],
 					yAxes: [{
 						type: 'logarithmic',
-						display: false,
 						gridLines:{
 							drawTicks: false,
-							drawOnChartArea: false
+							drawOnChartArea: false,
+							color:"rgba(255,255,255,0.5)"
+						},
+						afterBuildTicks: function(scale){
+							var max = scale.ticks[0];
+							var logMax = Math.log10(max);
+							var ticks = [100];
+							for (var i = 3; i < logMax; i++){
+								ticks.push(Math.pow(10, i));
+							}
+
+
+
+							ticks.push(max);
+							scale.ticks = ticks;
+						},
+						ticks: {
+							fontColor: "#fff",
+							callback: function(value, index, values) {
+								return parseInt(value / 1000) + 'k';
+							}
 						}
 					}]
 				},
@@ -104,7 +123,7 @@
 			data: {
 				labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
 				datasets: [{
-					data: [23, 35, 30, 20, 42, 15, 45],
+					data: [23, 35, 30, 20, 42, 8, 45],
 					fill: false,
 					lineTension: 0
 				}]
@@ -134,7 +153,8 @@
 							color:"rgba(255,255,255,0.5)"
 						},
 						ticks:{
-							fontColor: "#fff"
+							fontColor: "#fff",
+							beginAtZero: true
 						}
 					}]
 				},
