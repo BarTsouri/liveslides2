@@ -157,11 +157,11 @@
             content: "Daily Info"
         }
 
-        #graph{
+        .slide.graph{
             flex-direction: column;
         }
 
-        #graph span{
+        .slide.graph span{
             margin-bottom: 1vh;
             font-size: 3.75vh;
             text-decoration: underline;
@@ -180,9 +180,13 @@
 <div id="slider">
     <div class="background-image"></div>
     <div id="slides">
-        <div class="slide" id="graph">
-            <span>Unique Users</span>
+        <div class="slide graph" id="graph">
+            <span>Unique Users (Log Scale)</span>
             <canvas id="canvas"></canvas>
+        </div>
+        <div class="slide graph" id="graph-linear">
+            <span>New Leads</span>
+            <canvas id="linear-canvas"></canvas>
         </div>
         <div id="news-slide" class="slide">
             <span>A new baby bear was born yesterday in Ramat-Gan</span>

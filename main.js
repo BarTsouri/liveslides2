@@ -3,7 +3,8 @@
 
 	function init(){
 		initSlider();
-		initChart();
+		initChartLogScale();
+		initChartLinearScale();
 	}
 
 	var i = 0;
@@ -13,14 +14,14 @@
 			if (inTransit) return;
 			inTransit = true;
 			i += e.touches[0].screenX > window.innerWidth / 2 ? 1 : -1;
-			i = i < -4 ? -4: i > 0 ? 0 : i;
+			i = i < -5 ? -5: i > 0 ? 0 : i;
 			$(".slide").transition({x: 100 * i + "vw"}, 500, 'ease', function(){
 				inTransit = false;
 			})
 		})
 	}
 
-	function initChart(){
+	function initChartLogScale(){
 		var randomColor = function() {
 			return 'rgba(255, 255, 255, 1)';
 		};
@@ -90,7 +91,80 @@
 		});
 
 		var ctx = document.getElementById("canvas").getContext("2d");
-		window.c = new Chart(ctx, config);
-		window.c.defaultFontColor = "#fff";
+		new Chart(ctx, config);
 	}
+
+	function initChartLinearScale(){
+		var randomColor = function() {
+			return 'rgba(255, 255, 255, 1)';
+		};
+
+		var config = {
+			type: 'line',
+			data: {
+				labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+				datasets: [{
+					data: [23, 35, 30, 20, 42, 15, 45],
+					fill: false,
+					lineTension: 0
+				}]
+			},
+			options: {
+				responsive: true,
+				title:{
+					display:false
+				},
+				scales: {
+					xAxes: [{
+						display: true,
+						gridLines:{
+							drawTicks: false,
+							drawOnChartArea: false,
+							//drawBorder: false,
+							color:"rgba(255,255,255,0.5)"
+						},
+						ticks:{
+							fontColor: "#fff"
+						}
+					}],
+					yAxes: [{
+						gridLines:{
+							drawTicks: false,
+							drawOnChartArea: false,
+							color:"rgba(255,255,255,0.5)"
+						},
+						ticks:{
+							fontColor: "#fff"
+						}
+					}]
+				},
+				legend: {
+					display: false
+				},
+
+				tooltips: {
+					mode: 'single',
+					yPadding: 8,
+					titleMarginBottom: 0,
+					titleFontSize: 0,
+					callbacks: {
+						label: function(tooltipItem, data) {
+							return tooltipItem.yLabel;
+						}
+					}
+				}
+			}
+		};
+
+		config.data.datasets.forEach(function(dataset) {
+			dataset.borderColor = "rgba(255,255,255, 0.8)";
+			dataset.pointBorderColor = '#CCC';
+			dataset.pointBackgroundColor = randomColor(1);
+			dataset.pointBorderWidth = 1;
+		});
+
+		var ctx = document.getElementById("linear-canvas").getContext("2d");
+		new Chart(ctx, config);
+	}
+
 }());
