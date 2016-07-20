@@ -65,19 +65,17 @@
 				},
 				legend: {
 					display: false
-				}
-			},
+				},
 
-			tooltip: {
-				mode: 'single',
-				callbacks: {
-					title: function(tooltipItems, data) {
-						// Title doesn't make sense for scatter since we format the data as a point
-						return '';
-					},
-					label: function(tooltipItem, data) {
-						debugger;
-						return '';
+				tooltips: {
+					mode: 'single',
+					yPadding: 8,
+					titleMarginBottom: 0,
+					titleFontSize: 0,
+					callbacks: {
+						label: function(tooltipItem, data) {
+							return tooltipItem.yLabel;
+						}
 					}
 				}
 			}
