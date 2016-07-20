@@ -47,11 +47,11 @@
 						gridLines:{
 							drawTicks: false,
 							drawOnChartArea: false,
-							drawBorder: false
+							//drawBorder: false,
+							color:"rgba(255,255,255,0.5)"
 						},
 						ticks:{
-							fontColor: "#fff",
-							padding: 0
+							fontColor: "#fff"
 						}
 					}],
 					yAxes: [{
