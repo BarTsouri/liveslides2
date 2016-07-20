@@ -64,21 +64,24 @@
 						},
 						afterBuildTicks: function(scale){
 							var max = scale.ticks[0];
-							var logMax = Math.log10(max);
-							var ticks = [100];
-							for (var i = 3; i < logMax; i++){
-								ticks.push(Math.pow(10, i));
+							var maxLog = Math.log10(max);
+							var interval = maxLog / 10;
+							var ticks = [];
+							for (var i = 4; i <= 10; i ++){
+								ticks.push(Math.pow(10, interval * i))
 							}
 
-
-
-							ticks.push(max);
 							scale.ticks = ticks;
 						},
 						ticks: {
 							fontColor: "#fff",
 							callback: function(value, index, values) {
-								return parseInt(value / 1000) + 'k';
+								if (value > 10000){
+									value = parseInt(value / 1000) + 'k'
+								} else {
+									value = parseInt(value);
+								}
+								return value;
 							}
 						}
 					}]
